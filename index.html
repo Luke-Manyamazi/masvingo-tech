@@ -223,10 +223,39 @@
       opacity: 1;
       pointer-events: auto;
     }
+
+    /* Rising star-field background */
+    #star-field {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .star-particle {
+      position: absolute;
+      bottom: -10px;
+      border-radius: 50%;
+      opacity: 0;
+      animation-name: rise;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    @keyframes rise {
+      0% { transform: translate3d(0, 0, 0); opacity: 0; }
+      8% { opacity: var(--star-op, 0.7); }
+      92% { opacity: var(--star-op, 0.7); }
+      100% { transform: translate3d(var(--star-drift, 0px), -110vh, 0); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .star-particle { animation: none; opacity: 0; }
+    }
   </style>
 </head>
 
 <body class="bg-charcoal text-white font-sans antialiased selection:bg-emerald-500/30">
+
+  <div id="star-field"></div>
 
   <div id="scroll-progress"></div>
 
@@ -879,6 +908,35 @@
     document.querySelectorAll('[data-whatsapp]').forEach((el) => {
       el.setAttribute('href', CONFIG.whatsappLink);
     });
+
+    // Rising star-field background
+    (function initStarField() {
+      const field = document.getElementById('star-field');
+      const colors = ['#FFFFFF', '#34D399', '#E3B23C'];
+      const count = window.innerWidth < 640 ? 35 : 70;
+
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('span');
+        star.className = 'star-particle';
+        const size = (Math.random() * 2.2 + 1).toFixed(1);
+        const duration = (Math.random() * 16 + 10).toFixed(1);
+        const delay = (Math.random() * -30).toFixed(1);
+        const drift = (Math.random() * 60 - 30).toFixed(0);
+        const opacity = (Math.random() * 0.5 + 0.25).toFixed(2);
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        star.style.left = Math.random() * 100 + '%';
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.background = color;
+        star.style.setProperty('--star-drift', drift + 'px');
+        star.style.setProperty('--star-op', opacity);
+        star.style.animationDuration = duration + 's';
+        star.style.animationDelay = delay + 's';
+
+        field.appendChild(star);
+      }
+    })();
 
     if (CONFIG.whatsappLink.includes('YOUR-INVITE-CODE')) {
       console.warn('⚠️ Masvingo Tech Community: replace CONFIG.whatsappLink in index.html with your real WhatsApp invite link before launch.');

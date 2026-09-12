@@ -1,39 +1,57 @@
 # Masvingo Tech Community
 
-Landing page for Masvingo Tech Community — a community-driven tech ecosystem connecting developers, students, entrepreneurs, and innovators across Masvingo Province, Zimbabwe.
+> A community-focused technology landing page connecting developers, students, entrepreneurs, and innovators across Masvingo Province, Zimbabwe.
 
-Live concept site: single-page, no build step, no backend. Built with static HTML, Tailwind CSS (via CDN), and vanilla JS for scroll animations and interactivity.
+Masvingo Tech Community is a lightweight static website concept designed to showcase a local technology ecosystem and provide an accessible starting point for community participation.
 
-## Running locally
+## Highlights
 
-No install or build required — it's a single static HTML file.
+- Responsive landing-page experience
+- Community-focused information architecture
+- Mobile navigation and section-based browsing
+- Scroll-reveal and visual interaction effects
+- Centralized WhatsApp community-link configuration
+- Social sharing and canonical metadata prepared for deployment
 
-- Open `index.html` directly in a browser, or
-- Serve it locally for a more production-like experience (some browsers restrict fonts/local file access under `file://`):
+## Technology
 
-  ```bash
-  npx serve .
-  # or
-  python -m http.server 8000
-  ```
+- HTML5
+- Tailwind CSS via CDN
+- Vanilla JavaScript
+- Responsive CSS
+- Browser-based animations and interactions
 
-## Project structure
+## Project Structure
 
-```
-index.html          All markup, styles, and script (single file)
-favicon.svg          Fallback vector favicon
+```text
+index.html
+favicon.svg
 assets/
-  logo.png           Full brand lockup (icon + wordmark), transparent background
-  logo-icon.png       Cropped emblem only, used in nav/footer/favicon
+├── logo.png
+├── logo-icon.png
+└── og-image.jpg
 ```
 
-## Before deploying
+The site is intentionally dependency-light: the page, styling, and interactivity are kept in a small static project without a framework, backend, or build pipeline.
 
-- **WhatsApp invite link**: set in `CONFIG.whatsappLink` near the bottom of `index.html`. All `[data-whatsapp]` links pull from this single source of truth.
-- **OG image**: `assets/og-image.jpg` is referenced in the `<meta property="og:image">` tags but not yet included — add a real 1200×630 social preview image before launch.
-- **Canonical URL**: currently set to `https://masvingotech.org/` in the `<link rel="canonical">` and Open Graph tags — update if the domain changes.
+## Running Locally
 
-## Tech notes
+No package installation is required.
 
-- Styling is Tailwind CSS loaded from the CDN plus a small `<style>` block for custom effects (glass cards, gradient blobs, scroll-reveal, roadmap line draw, scroll-progress bar, cursor parallax on the hero).
-- All interactivity (mobile menu, active nav highlighting, section reveals, scroll-to-top button) is plain JS at the bottom of `index.html` — no framework, no bundler.
+```bash
+npx serve .
+```
+
+Or use Python's built-in server:
+
+```bash
+python -m http.server 8000
+```
+
+## Deployment Notes
+
+Before production launch, verify the community invitation link, Open Graph preview image, and canonical domain configuration. The project can be hosted on any static web host.
+
+## Engineering Focus
+
+This project demonstrates responsive static-site development, semantic HTML, utility-first CSS, browser-side JavaScript, lightweight interaction design, and deployment-ready metadata without introducing unnecessary framework complexity.
